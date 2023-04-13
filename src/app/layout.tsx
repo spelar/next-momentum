@@ -1,5 +1,7 @@
-import ReactQuery from "@/app/ReactQuery";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
+import "react-loading-skeleton/dist/skeleton.css";
+import ReactQuery from "./ReactQuery";
 
 export const metadata = {
   title: "Create Next App",

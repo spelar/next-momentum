@@ -1,6 +1,6 @@
 import { InfiniteQueryResponse } from "@/types/books";
 
-export const bookData: InfiniteQueryResponse = {
+export const bookInfiniteQueryData: InfiniteQueryResponse = {
   pageParams: [[1, 2]],
   pages: [
     {
