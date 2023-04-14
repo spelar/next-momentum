@@ -2,7 +2,7 @@
 
 ### Project Stack
 
-- Next
+- Next13 app/디렉토리
 - React
 - React-Query
 - TypeScript

@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
 import List from "../list";
-import { bookData } from "@/fixtures/books";
+import { bookInfiniteQueryData } from "@/fixtures/bookInfiniteQueryData";
 
-describe("List component", () => {
-  it("should render a list of books", () => {
-    const { getByText } = render(<List data={bookData} />);
+describe("List", () => {
+  it("책리스트가 렌더링 되야 한다", () => {
+    const { getByText } = render(<List data={bookInfiniteQueryData} />);
     expect(
       getByText("HTML5 + CSS3 + Javascript 웹 프로그래밍")
     ).toBeInTheDocument();
