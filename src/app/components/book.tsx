@@ -13,7 +13,7 @@ import SkeletonElement from "./common/skeletonElement";
 import List from "./common/list";
 
 export default function Book() {
-  const [inputValue, setInputValue] = useState<string>("javascript");
+  const [inputValue, setInputValue] = useState<string>("");
   const { ref, inView } = useInView({ threshold: 0.3 });
   const {
     data,
