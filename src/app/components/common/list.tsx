@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { BookResponse, InfiniteQueryResponse } from "@/types/books";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ListProps {
   data: InfiniteQueryResponse;
@@ -10,42 +11,42 @@ interface ListProps {
 export default function List({ data }: ListProps) {
   return (
     <ListWrapper>
-      <div>
-        {data?.pages.map((page: BookResponse, i: number) => (
-          <div className="itemWrapper" key={`book + ${i}`}>
-            {page.documents.map((item) => (
-              <Link href={item.url} target="_blank">
-                <div className="item" key={item.isbn + i}>
-                  <div className="itemInner">
-                    <div className="image">
-                      {item.thumbnail ? (
-                        <img
-                          src={item.thumbnail}
-                          alt={item.title + `책 이미지`}
-                        />
-                      ) : (
-                        <div className="image noimage">
-                          <span />
-                        </div>
-                      )}
-                    </div>
-                    <div className="info">
-                      <h2>{item.title}</h2>
-                      <div className="priceWrap">
-                        <span className="price">
-                          {item.price
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                        </span>
+      <div className="itemWrapper">
+        {data?.pages.map((page: BookResponse) =>
+          page.documents.map((item, i) => (
+            <Link href={item.url} target="_blank" key={item.isbn + i}>
+              <div className="item">
+                <div className="itemInner">
+                  <div className="image">
+                    {item.thumbnail ? (
+                      <Image
+                        src={item.thumbnail}
+                        width={60}
+                        height={87}
+                        alt={item.title + `책 이미지`}
+                      />
+                    ) : (
+                      <div className="image noimage">
+                        <span />
                       </div>
-                      <div className="person">{item.authors}</div>
+                    )}
+                  </div>
+                  <div className="info">
+                    <h2>{item.title}</h2>
+                    <div className="priceWrap">
+                      <span className="price">
+                        {item.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      </span>
                     </div>
+                    <div className="person">{item.authors}</div>
                   </div>
                 </div>
-              </Link>
-            ))}
-          </div>
-        ))}
+              </div>
+            </Link>
+          ))
+        )}
       </div>
     </ListWrapper>
   );
@@ -66,10 +67,9 @@ const ListWrapper = styled.div`
         .image {
           float: left;
           position: relative;
-          min-width: 60px;
-          min-height: 87px;
           img {
-            width: 100%;
+            width: auto;
+            height: auto;
           }
         }
         .noimage {

@@ -6,6 +6,9 @@ const nextConfig = {
   env: {
     KAKAO_API_KEY: process.env.KAKAO_API_KEY,
   },
+  images: {
+    domains: ["search1.kakaocdn.net", "localhost"],
+  },
 };
 
 module.exports = nextConfig;
