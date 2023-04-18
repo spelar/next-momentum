@@ -18,7 +18,7 @@ export default function List({ data }: ListProps) {
               <div className="item">
                 <div className="itemInner">
                   <div className="image">
-                    {item.thumbnail ? (
+                    {item.thumbnail !== "" ? (
                       <Image
                         src={item.thumbnail}
                         width={60}
@@ -26,9 +26,14 @@ export default function List({ data }: ListProps) {
                         alt={item.title + `책 이미지`}
                       />
                     ) : (
-                      <div className="image noimage">
-                        <span />
-                      </div>
+                      <Image
+                        src={
+                          "https://t4.ftcdn.net/jpg/02/51/95/53/360_F_251955356_FAQH0U1y1TZw3ZcdPGybwUkH90a3VAhb.jpg"
+                        }
+                        width={60}
+                        height={87}
+                        alt={"책 이미지 없음"}
+                      />
                     )}
                   </div>
                   <div className="info">
@@ -70,18 +75,6 @@ const ListWrapper = styled.div`
           img {
             width: auto;
             height: auto;
-          }
-        }
-        .noimage {
-          background-color: #ececec;
-          span {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 26px;
-            height: 24px;
-            margin-top: -12px;
-            margin-left: -13px;
           }
         }
         .info {
