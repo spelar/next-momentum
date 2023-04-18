@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import styled from "@emotion/styled";
 import Header from "./common/header";
 import useFetchBooks from "@/hooks/useFetchBooks";
 import { queryClient } from "../ReactQuery";
@@ -54,7 +55,7 @@ export default function Book() {
   }
 
   return (
-    <React.Fragment>
+    <BookWrapper>
       <Header
         onInputChange={onInputChange}
         inputValue={inputValue}
@@ -81,6 +82,11 @@ export default function Book() {
           {isFetching && isFetchingNextPage ? <SkeletonElement /> : null}
         </div>
       </div>
-    </React.Fragment>
+    </BookWrapper>
   );
 }
+
+const BookWrapper = styled.div`
+  margin: 0 auto;
+  max-width: 768px;
+`;

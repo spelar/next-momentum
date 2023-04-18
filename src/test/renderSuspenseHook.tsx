@@ -4,7 +4,7 @@ import ReactQueryWrapper from "./ReactQueryWrapper";
 const renderSuspenseHook = <T, K>(render: (initialProps: K) => T) =>
   renderHook<T, K>(render, {
     wrapper: ({ children }) => (
-      <ReactQueryWrapper suspense>{children}</ReactQueryWrapper>
+      <ReactQueryWrapper>{children}</ReactQueryWrapper>
     ),
   });
 

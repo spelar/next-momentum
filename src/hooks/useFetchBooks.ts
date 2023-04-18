@@ -29,7 +29,7 @@ function useFetchBooks(query: string) {
       },
       retry: false,
       enabled: false,
-      suspense: true,
+      suspense: false,
     }
   );
 

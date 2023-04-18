@@ -2,8 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { ReactNode, Suspense } from "react";
-import SkeletonElement from "./components/common/skeletonElement";
+import { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
@@ -14,7 +13,7 @@ export const queryClient = new QueryClient({
     queries: {
       retry: false,
       useErrorBoundary: false,
-      suspense: true,
+      suspense: false,
     },
   },
 });
@@ -22,7 +21,7 @@ export const queryClient = new QueryClient({
 export default function ReactQuery({ children }: Props) {
   return (
     <QueryClientProvider client={queryClient}>
-      <Suspense fallback={<SkeletonElement />}>{children}</Suspense>
+      {children}
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

@@ -65,11 +65,11 @@ const HeaderSearch = styled.div`
     height: 42px;
     padding: 0 42px 0px 12px;
     border: 0;
-    background-color: $white-base;
+    background-color: #fff;
     font-weight: normal;
     font-size: 17px;
     line-height: 26px;
-    color: $black-base;
+    color: #000;
     border-radius: 4px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;

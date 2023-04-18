@@ -20,15 +20,13 @@ function ReactQueryWrapper({
       queries: {
         retry: false,
         useErrorBoundary: false,
-        suspense: true,
+        suspense: false,
       },
     },
   });
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Suspense fallback={<SkeletonElement />}>{children}</Suspense>
-    </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 }
 
