@@ -8,8 +8,6 @@ jest.mock("./../../services/books");
 
 describe("useInfiniteQuery", () => {
   let query = "javacript";
-  const useFetchBooksHook = () =>
-    renderSuspenseHook(() => useFetchBooks(query));
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -18,7 +16,7 @@ describe("useInfiniteQuery", () => {
   });
 
   it("book에 대한 정보를 반환해야만 한다", async () => {
-    const { result } = useFetchBooksHook();
+    const { result } = renderSuspenseHook(() => useFetchBooks(query));
 
     result.current.refetch();
 
