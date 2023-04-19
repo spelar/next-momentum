@@ -8,6 +8,7 @@ import { queryKeys } from "@/react-query/constants";
 import ReactQueryWrapper from "@/test/ReactQueryWrapper";
 import { toast } from "react-toastify";
 import { queryClient } from "@/app/ReactQuery";
+import Header from "../common/header";
 
 const mockedUseFetchBooksQuery = useFetchBooks as jest.Mock;
 
@@ -18,8 +19,9 @@ describe("Book", () => {
   const mockHandleGetBook = jest.fn();
 
   beforeEach(() => {
+    jest.clearAllMocks();
     mockedUseFetchBooksQuery.mockImplementation(() => ({
-      data: bookInfiniteQueryData,
+      data: given.data,
       hasNextPage: given.hasNextPage,
       fetchNextPage: handleFetchNextPage,
       isFetching: given.isFetching,
@@ -81,13 +83,21 @@ describe("Book", () => {
   });
 
   it("책리스트가 렌더링 되야 한다", () => {
-    const { getByText } = render(<Book />);
+    given("data", () => bookInfiniteQueryData);
+    const { getByText } = renderBook();
     expect(
       getByText("HTML5 + CSS3 + Javascript 웹 프로그래밍")
     ).toBeInTheDocument();
     expect(
       getByText("JavaScript + jQuery 입문(모던 웹을 위한)(3판)")
     ).toBeInTheDocument();
+  });
+
+  it("검색 결과가 없는 경우 '검색 결과가 없습니다' 문구가 표시되어야 한다", () => {
+    const emptyData = { pages: [{ documents: [] }] };
+    given("data", () => emptyData);
+    const { getByText } = renderBook();
+    expect(getByText("검색 결과가 없습니다")).toBeInTheDocument();
   });
 
   it("error message가 보여져야 한다", () => {
@@ -113,6 +123,15 @@ describe("Book", () => {
   it("isFetching과 isFetchingNextPage이 true일때 스켈레톤이 보여져야 한다", () => {
     given("isFetching", () => true);
     given("isFetchingNextPage", () => true);
+    given("data", () => bookInfiniteQueryData);
+    renderBook();
+
+    expect(screen.getByTestId("skeleton-element")).toBeInTheDocument();
+  });
+
+  it("data가 없고, isFetching이 true일때 스켈레톤이 보여져야 한다", () => {
+    given("isFetching", () => true);
+    given("data", () => false);
     renderBook();
 
     expect(screen.getByTestId("skeleton-element")).toBeInTheDocument();

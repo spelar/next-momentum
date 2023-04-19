@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import Header from "./common/header";
 import useFetchBooks from "@/hooks/useFetchBooks";
@@ -36,10 +36,14 @@ export default function Book() {
     setInputValue(e.target.value);
   };
 
-  const onSearchClick = () => {
+  const onSearchClick = useCallback(() => {
+    if (inputValue === "") {
+      alert("검색어를 입력해주세요.");
+      return;
+    }
     queryClient.resetQueries([queryKeys.books]);
     getBooks();
-  };
+  }, [inputValue, getBooks]);
 
   if (isError && error) {
     toast.error(error.response.data.message, {
@@ -61,6 +65,7 @@ export default function Book() {
         inputValue={inputValue}
         onSearchClick={onSearchClick}
       />
+      {!data && isFetching && <SkeletonElement />}
       {data && <List data={data} />}
       <ToastContainer
         position="top-right"

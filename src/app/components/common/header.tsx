@@ -28,6 +28,7 @@ export default function Header({
             placeholder="책을 검색해 보세요."
             onChange={onInputChange}
             value={inputValue}
+            autoComplete="off"
           />
           <button className="btnSearch" onClick={onSearchClick}>
             검색
@@ -44,7 +45,7 @@ const HeaderWrapper = styled.div`
   background-color: #1ab1ff;
 `;
 
-const Logo = styled.div`
+const Logo = styled.h1`
   height: 48px;
   padding-left: 15px;
   color: #fff;

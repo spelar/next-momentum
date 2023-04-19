@@ -13,44 +13,50 @@ export default function List({ data }: ListProps) {
     <ListWrapper>
       <div className="itemWrapper">
         {data?.pages.map((page: BookResponse) =>
-          page.documents.map((item, i) => (
-            <Link href={item.url} target="_blank" key={item.isbn + i}>
-              <div className="item">
-                <div className="itemInner">
-                  <div className="image">
-                    {item.thumbnail !== "" ? (
-                      <Image
-                        src={item.thumbnail}
-                        width={60}
-                        height={87}
-                        alt={item.title + `책 이미지`}
-                      />
-                    ) : (
-                      <Image
-                        src={
-                          "https://t4.ftcdn.net/jpg/02/51/95/53/360_F_251955356_FAQH0U1y1TZw3ZcdPGybwUkH90a3VAhb.jpg"
-                        }
-                        width={60}
-                        height={87}
-                        alt={"책 이미지 없음"}
-                      />
-                    )}
-                  </div>
-                  <div className="info">
-                    <h2>{item.title}</h2>
-                    <div className="priceWrap">
-                      <span className="price">
-                        {item.price
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                      </span>
+          page.documents.length === 0 ? (
+            <div key={"No results"} style={{ textAlign: "center" }}>
+              검색 결과가 없습니다
+            </div>
+          ) : (
+            page.documents.map((item, i) => (
+              <Link href={item.url} target="_blank" key={item.isbn + i}>
+                <div className="item">
+                  <div className="itemInner">
+                    <div className="image">
+                      {item.thumbnail !== "" ? (
+                        <Image
+                          src={item.thumbnail}
+                          width={60}
+                          height={87}
+                          alt={item.title + `책 이미지`}
+                        />
+                      ) : (
+                        <Image
+                          src={
+                            "https://t4.ftcdn.net/jpg/02/51/95/53/360_F_251955356_FAQH0U1y1TZw3ZcdPGybwUkH90a3VAhb.jpg"
+                          }
+                          width={60}
+                          height={87}
+                          alt={"책 이미지 없음"}
+                        />
+                      )}
                     </div>
-                    <div className="person">{item.authors}</div>
+                    <div className="info">
+                      <h2>{item.title}</h2>
+                      <div className="priceWrap">
+                        <span className="price">
+                          {item.price
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        </span>
+                      </div>
+                      <div className="person">{item.authors}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))
+              </Link>
+            ))
+          )
         )}
       </div>
     </ListWrapper>
@@ -69,6 +75,9 @@ const ListWrapper = styled.div`
         padding: 10px;
         border-bottom: 1px solid #e6e6e6;
         box-sizing: border-box;
+        @media only screen and (min-width: 1024px) {
+          padding: 20px 10px;
+        }
         .image {
           float: left;
           position: relative;
