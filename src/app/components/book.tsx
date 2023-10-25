@@ -92,6 +92,8 @@ export default function Book() {
 }
 
 const BookWrapper = styled.div`
+  overflow-y: auto;
   margin: 0 auto;
   max-width: 768px;
+  max-height: 1000px;
 `;
